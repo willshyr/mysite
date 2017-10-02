@@ -1,0 +1,17 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <!--
+        instead of hardcoding /polls/{{ question.id }}
+        we use the name argument in the url() function so that we don't have to change all templates everytime we change URLs on projects with a lot of templates
+         -->
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
